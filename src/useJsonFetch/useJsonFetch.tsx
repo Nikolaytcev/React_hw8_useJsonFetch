@@ -6,7 +6,7 @@ export default function useJsonFetch (url: string, opts?: {method: string}) {
   const [error, setError] = useState<Error>()
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData () {
         try {
             const res = await fetch(url, opts);
             if (!res.ok) {throw new Error(res.statusText)}
@@ -23,6 +23,6 @@ export default function useJsonFetch (url: string, opts?: {method: string}) {
         }
     }
     fetchData()
-  }, [])
+  }, [url, opts])
   return ([{data, loading, error}])
 }
